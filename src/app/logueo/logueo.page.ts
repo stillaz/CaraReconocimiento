@@ -29,7 +29,7 @@ export class LogueoPage implements OnInit {
 
   async ngOnInit() {
     this.loading = await this.loadingController.create({
-      message: 'Iniciando verificación de cara...',
+      message: 'Iniciando reconocimiento facial...',
       showBackdrop: false
     });
   }
@@ -43,8 +43,8 @@ export class LogueoPage implements OnInit {
     this.loading.onDidDismiss().then(async () => {
       this.alert = await this.alertController.create({
         header: 'Acceso a la plataforma',
-        subHeader: 'Permitenos acceder a la cámara para identificar tu cara en el sistema.',
-        message: 'Activa la cámara y acerca tu cara al frente para identificarte.',
+        subHeader: 'Permitenos acceder a la cámara para reconocimiento facial en el sistema.',
+        message: 'Activa la cámara y acerca tu rostro al frente para verificarte.',
         buttons: [{
           text: 'Aceptar',
           handler: () => {

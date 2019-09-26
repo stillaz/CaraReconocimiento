@@ -1,7 +1,7 @@
 {
   "name": "facedetect",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Alexander Aguirre",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -55,5 +55,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "API para reconocimiento facial web."
 }

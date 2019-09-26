@@ -26,7 +26,7 @@ export class FaceDetectComponent implements OnInit {
 
   ngOnInit() { }
 
-  cancelar(){
+  cancelar() {
     location.reload();
   }
 
@@ -45,12 +45,12 @@ export class FaceDetectComponent implements OnInit {
     if (this.estado === -1) {
       this.presentNoCara();
     } else if (this.estado === 1 && !this.noReconocido) {
-      loading.message = 'Identificando usuario';
+      loading.message = 'Verificando rostro';
       loading.duration = 5000;
       loading.onDidDismiss().then(async res => {
         if (!res.data) {
           const alert = await this.alertController.create({
-            header: 'Usuario no identificado',
+            header: 'Rostro no identificado',
             message: 'Intenta nuevamente, procura estar desde un lugar con poca luminicidad.',
             buttons: [{
               text: 'Aceptar',
@@ -68,7 +68,7 @@ export class FaceDetectComponent implements OnInit {
     } else if (this.estado === 2) {
       subject.complete();
       loading.dismiss({ data: 'ok' }).then(() => {
-        loading.message = 'Reconocimiento de cara completo, ingresando a la plataforma...';
+        loading.message = 'Reconocimiento facial completo, ingresando a la plataforma...';
         loading.duration = 2000;
         loading.present();
         loading.onDidDismiss().then(async () => {
@@ -85,7 +85,7 @@ export class FaceDetectComponent implements OnInit {
     setTimeout(async () => {
       if (this.estado === -1) {
         const toast = await this.toastController.create({
-          message: 'No se reconoce la cara',
+          message: 'No se detecta algún rostro',
           duration: 2000
         });
 
