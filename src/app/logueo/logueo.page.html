@@ -1,0 +1,8 @@
+<ion-slides pager="true" [options]="slideOpts" (ionSlidePrevEnd)="slides.lockSwipeToNext(true);">
+  <ion-slide>
+    <app-usuario (respuesta)="onUsuario($event)"></app-usuario>
+  </ion-slide>
+  <ion-slide *ngIf="usuario">
+    <app-face-detect [usuario]="usuario"></app-face-detect>
+  </ion-slide>
+</ion-slides>

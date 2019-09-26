@@ -1,0 +1,23 @@
+<ion-content>
+  <div class="background">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4"></ion-col>
+        <ion-col size="4" style="margin-left: auto; margin-right: auto; display: block;">
+          <!--<img src="assets/logo.png" style="width:100%;">-->
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Usuario</ion-label>
+        <ion-input placeholder="Ingresa aquí tu usuario" type="text" [(ngModel)]="username"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-button fill="clear" color="light" (click)="continuar()" [disabled]="!username">
+      Continuar</ion-button>
+  </div>
+</ion-content>
