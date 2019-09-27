@@ -1,3 +1,10 @@
+<ion-item>
+  <img src="assets/logo.png">
+  <ion-title>
+    Ingreso al sistema de reconocimiento facial
+  </ion-title>
+</ion-item>
+
 <ion-slides pager="true" [options]="slideOpts" (ionSlidePrevEnd)="slides.lockSwipeToNext(true);">
   <ion-slide>
     <app-usuario (respuesta)="onUsuario($event)"></app-usuario>

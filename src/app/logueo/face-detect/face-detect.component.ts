@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/usuario.service';
+import { FaceDetectService } from 'src/app/face-detect.service';
 
 declare const runFaceRecognition: any;
 declare const stopVideo: any;
@@ -20,37 +21,48 @@ export class FaceDetectComponent implements OnInit {
 
   constructor(
     private alertController: AlertController,
+    private faceDetectService: FaceDetectService,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private usuarioService: UsuarioService) { }
 
   ngOnInit() { }
 
+  async ngAfterViewInit() {
+    if (this.usuario) {
+      this.init();
+    }
+  }
+
   cancelar() {
     location.reload();
   }
 
-  async ngAfterViewInit() {
-    if (this.usuario) {
-      const subject = new Subject();
-      runFaceRecognition(subject, this.usuario).subscribe(async (res: number) => {
-        this.estado = res;
-        const loading = await this.loadingController.create({});
-        this.procesarReconocimiento(subject, loading);
-      });
-    }
+  private init() {
+    setTimeout(async () => {
+      if (!this.faceDetectService.isLoaded()) {
+        this.init();
+      } else {
+        const subject = new Subject();
+        runFaceRecognition(subject, this.usuario).subscribe(async (res: number) => {
+          this.estado = res;
+          const loading = await this.loadingController.create({});
+          this.procesarReconocimiento(subject, loading);
+        });
+      }
+    }, 500)
   }
 
   private async procesarReconocimiento(subject: Subject<any>, loading: HTMLIonLoadingElement) {
     if (this.estado === -1) {
       this.presentNoCara();
     } else if (this.estado === 1 && !this.noReconocido) {
-      loading.message = 'Verificando rostro';
+      loading.message = 'Identificando rostro...';
       loading.duration = 5000;
       loading.onDidDismiss().then(async res => {
         if (!res.data) {
           const alert = await this.alertController.create({
-            header: 'Rostro no identificado',
+            header: 'No ha sido identificado',
             message: 'Intenta nuevamente, procura estar desde un lugar con poca luminicidad.',
             buttons: [{
               text: 'Aceptar',

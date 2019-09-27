@@ -39,7 +39,7 @@ function runFaceRecognition(sub, id) {
   return sub
 }
 
-async function loadLabeledImages(id) {
+function loadLabeledImages(id) {
   const labels = [id]
   return Promise.all(
     labels.map(async label => {
@@ -52,7 +52,7 @@ async function loadLabeledImages(id) {
 
       return new faceapi.LabeledFaceDescriptors(label, descriptions)
     })
-  ).then(async data => labeledFaceDescriptors = data)
+  )
 }
 
 async function init() {
